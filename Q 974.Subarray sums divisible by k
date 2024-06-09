@@ -1,0 +1,39 @@
+#C++ code
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        int sum=0;
+        int ans=0;
+        unordered_map<int,int> record={{0,1}};
+        for(int elem:nums){
+            sum+=elem;
+            int modulus= (sum % k +k) % k;
+            if(record.count(modulus)){
+                ans+=record[modulus];
+
+            }
+            record[modulus]++;
+        }
+        return ans;
+
+            
+        
+    }
+};
+
+
+#python code
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        record=defaultdict(int)
+        ans=0
+        sum=0
+        record[0]=1
+        for num in nums:
+            sum+=num
+            modulus=sum % k
+            if modulus in record:
+                ans+=record[modulus]
+            record[modulus]+=1
+
+        return ans
